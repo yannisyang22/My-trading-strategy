@@ -1,0 +1,195 @@
+universe:
+  ticker: "BTC-USD"
+  start: "2018-01-01"
+  end: "2026-02-25"
+
+backtest:
+  initial_equity: 1.0
+
+costs:
+  fee_bps: 2.0
+  slippage_bps: 3.0
+  pos_step_threshold: 0.08
+
+filters:
+  weekly_resample: "W-SUN"
+
+indicators:
+  ema_fast: 56
+  sma_mid: 116
+  bb_n: 20
+  bb_k: 2.0
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+
+mtf_score:
+  long_th: 7.0
+  short_th: 9.2
+  gap_th: 1.9
+  exit_gap: 1.5
+  trend_mode: "both"
+  use_bb_mid: true
+  use_macd: true
+  wy_bonus: 1.0
+  weights:
+    "1D": 1.0
+    "2D": 1.0
+    "3D": 1.0
+    "5D": 1.0
+    "W": 2.0
+    "ME": 3.0   # FIX: was "M"
+  entry_confirm_days: 2
+  emit_debug_cols: false
+  entry_confirm_days_bear: 4
+
+trend:
+  long_size: 1.1
+  short_size: 0.35
+  min_hold_days: 10
+  weekly_bb_buffer: 0.006
+  use_weekly_macd_filter: true
+
+regime:
+  bb_n: 20
+  bb_k: 2.0
+  bw_window: 252
+  bw_quantile: 0.45
+  ma_slope_days: 20
+  ma_slope_th: 0.02
+  confirm_days: 5
+
+grid:
+  bb_n: 20
+  bb_k: 2.0
+  leverage: 0.60
+  deadzone: 0.40
+  smooth_days: 7
+  breakout_margin: 0.008
+  breakout_decay: 0.35
+  bw_ref_window: 252
+  lev_scale_lo: 0.60
+  lev_scale_hi: 1.20
+  kappa: 1.20
+  grid_leverage_cap: 1.2
+
+bb_regime:
+  lookback_weeks: 156
+  squeeze_q: 0.20
+  open_q: 0.60
+  rise_weeks: 2
+  grid_alpha_in_squeeze: 0.50
+  trend_mult_in_squeeze: 0.60
+  trend_mult_in_neutral: 0.85
+  trend_cap_in_neutral: 0.80
+
+pullback_grid:
+  enabled: true
+  support_band: 0.01     
+  confirm_days: 2         
+  trend_mult: 0.80        
+  grid_alpha: 0.60        
+  grid_cap: 0.30
+
+bear_grid:
+  enabled: true
+  mult: 1.35
+  cap: 0.60
+  bw_ref_window: 156          
+
+risk:
+  leverage_cap: 1.5
+  rv_q: 0.75
+  high_vol_mult: 0.82
+  max_long_in_bear: 0.3
+  bear_mult: 0.85
+  short_reduce_on_reclaim: 0.5
+
+leverage_boost:
+  gap1: 7.0
+  gap2: 14.0
+  mult1: 1.10
+  mult2: 1.30
+
+risk_control:
+  enabled: true
+  dd_start: 0.18
+  dd_end: 0.28
+  min_mult: 0.75
+
+wyckoff:
+  ban_short_score: 60
+  early_long_score: 75
+  early_long_leverage: 0.6
+  grid_on_score: 70
+  accum_score: 60
+  accum_bw_quantile: 0.35
+  atr_n: 14
+  vol_ma: 20
+  sc_ret_th: 0.08
+  sc_atr_mult: 2.0
+  sc_vol_mult: 1.8
+  sc_range_mult: 1.8
+  ar_lookahead: 20
+  ar_rebound: 0.12
+  st_lookahead: 60
+  st_near_low: 0.06
+  st_vol_frac: 0.75
+  spring_window: 120
+  spring_break: 0.01
+  sos_break: 0.00
+  score_smooth: 5
+  probe_long_size: 0.30
+  probe_confirm_days: 3
+
+wyckoff_top:
+  ban_long_score: 60
+  grid_on_score: 70
+  left_short_score: 70
+  atr_n: 14
+  vol_ma: 20
+  bc_ret_th: 0.08
+  bc_atr_mult: 2.0
+  bc_vol_mult: 1.8
+  bc_range_mult: 1.8
+  ar_lookahead: 20
+  ar_drop: 0.10
+  st_lookahead: 60
+  st_near_high: 0.06
+  st_vol_frac: 0.75
+  utad_window: 120
+  utad_break: 0.01
+  score_smooth: 5
+
+fib:
+  lookback: 120
+  ext1: 1.272
+  ext2: 1.618
+  tp1_reduce_to: 0.6
+  tp2_reduce_to: 0.3
+  wave_lookback: 200
+  wave_tol: 0.012
+  wave_only_in_bull: true
+
+stop:
+  enabled: true
+  atr_n: 14
+  trail_window: 20
+  m1: 2.0
+  m2: 3.0
+  mult1: 0.70
+  mult2: 0.40
+  only_if_abs_pos_gt: 0.80
+
+vol_target:
+  enabled: true
+  win: 20
+  target: 0.026
+  min_scale: 0.30
+  max_scale: 1.0
+  only_if_abs_pos_gt: 0.8
+
+short_retest:
+  band: 0.012
+  size: 0.20
+  require_expanding: true

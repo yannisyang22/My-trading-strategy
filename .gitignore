@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual env
+.venv/
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Outputs
+trade_reasons.csv
+*.png
+*.pdf
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Data cache (if any)
+*.parquet
+*.pkl
