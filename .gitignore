@@ -28,3 +28,4 @@ trade_reasons.csv
 # Data cache (if any)
 *.parquet
 *.pkl
+config.yaml
