@@ -17,19 +17,20 @@ This repo contains a low-frequency trend + range (grid) hybrid strategy framewor
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
 
-Run backtest
-
+### Run backtest
+```bash
 python run_backtest.py
-
+```
 Outputs:
 	•	Console stats (CAGR / Sharpe / Max DD / turnover / trades)
 	•	trade_reasons.csv for trade-by-trade diagnostics
 	•	Equity / drawdown plots
 
-⸻
+---
 
-2) Strategy Overview
+## 2) Strategy Overview
 
 A) Trend Module (MTF Scoring)
 
@@ -64,9 +65,9 @@ C) Fibonacci Overlay
 	•	tp1_short/tp2_short reduce short exposure to -0.6 / -0.3
 	•	Purpose: lock profits and reduce tail drawdowns.
 
-⸻
+---
 
-3) Range Regime + Grid Module
+## 3) Range Regime + Grid Module
 
 Range regime detection (grid_mode)
 
@@ -90,26 +91,26 @@ Directional restriction (in range mode):
 	•	Above weekly mid → grid biased to long only
 	•	Below weekly mid → grid biased to short only
 
-⸻
+---
 
-4) Risk Controls (Mild / Tail-focused)
+## 4) Risk Controls (Mild / Tail-focused)
 	•	High-volatility soft cap using rolling return volatility quantile
 	•	Bear-trend long cap (max_long_in_bear) to reduce bear market tail risk
 	•	ATR trailing “soft stop” (two-tier de-risk, no forced flat)
 	•	Vol targeting (downscale only, only when position is large)
 	•	Optional left-side short: bear-trend retest near weekly mid; reduce on reclaim
 
-⸻
+--
 
-5) Execution / Backtest Assumptions
+## 5) Execution / Backtest Assumptions
 	•	Next-day execution: pos_exec = pos_daily_raw.shift(1)
 	•	Returns: close-to-close (works well for BTC; for stocks use trading-day resampling)
 	•	Costs: fee_bps + slippage_bps
 	•	Position step threshold: skip small rebalances (but always allow risk reductions)
 
-⸻
+---
 
-6) Config
+## 6) Config
 
 Main params are in config.yaml (or config.example.yaml if you keep local config ignored).
 
@@ -121,15 +122,15 @@ Key tuning knobs:
 	•	risk.max_long_in_bear (bear tail risk)
 	•	costs.pos_step_threshold (reduce churn)
 
-⸻
+---
 
-7) Notes for US Stocks
+## 7) Notes for US Stocks
 	•	Use trading-day synthetic bars (2B/3B/5B) and weekly resample W-FRI.
 	•	Prefer adjusted prices (auto_adjust=True) to handle splits/dividends.
 
-⸻
+---
 
-Disclaimer
+## Disclaimer
 
 This code is for research/education only. It is not financial advice.
 
